@@ -1,0 +1,71 @@
+.card-dashboard {
+	border: 0.5px solid black;
+	border-radius: 15px;
+}
+.card-dashboard > h3 {
+	margin: 0 !important;
+	padding: 0.5em;
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-top-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-topleft: 15px;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+.bloc {
+	margin: 1em 0 1em;
+	border-radius: 6px;
+	background-color: rgb(192, 186, 186);
+	color: black;
+	border: 1px solid black;
+}
+
+.title,
+.bloc > h4 {
+	border-bottom: 1px solid black;
+}
+
+.stat-card,
+.doc-item {
+	text-align: center;
+	margin: 0.5em;
+	padding: 1em;
+	border-radius: 15px;
+	background-color: rgb(255, 255, 255);
+	list-style: none;
+}
+
+.todo,
+.map {
+	min-height: 30em;
+}
+
+.todo-item {
+	display: block;
+	margin: 1em;
+	font-size: medium;
+}
+.todo-item > small {
+	opacity: 0.5;
+	padding-left: 2.5em;
+}
+.todo-item > div > input {
+	margin-right: 0.5em;
+}
+
+.todo > * {
+	justify-content: left;
+}
+
+.stats > ul,
+.todo > ul {
+	justify-content: center;
+	flex-wrap: wrap;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.photo {
+	min-height: 15em;
+}

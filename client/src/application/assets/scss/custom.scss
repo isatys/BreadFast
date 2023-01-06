@@ -1,0 +1,149 @@
+$primary: #678efe;
+$warning: #ffee58;
+$danger: #ef7564;
+$primary-hover: #275efe;
+$warning-hover: #f4df26;
+$danger-hover: #ee523e;
+$background-grey: #b6b1b1;
+$success: #cbffc0;
+$success-hover: #90ff78;
+
+body {
+	margin: 0;
+	font-size: large;
+	font-weight: 600;
+}
+
+section {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+button {
+	padding: 1em;
+	border-radius: 6px;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	min-width: 10em;
+	font-weight: 800;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+h3,
+h4 {
+	margin: 0.5em !important;
+}
+
+a {
+	color: black !important;
+	text-decoration: none !important;
+}
+.underline {
+	color: $primary !important;
+	text-decoration: underline !important;
+}
+.underline:hover {
+	color: $primary-hover !important;
+}
+
+.primary {
+	background-color: $primary;
+	color: white !important;
+	border: 1px solid $primary-hover;
+	border-radius: 6px !important;
+	display: flex;
+	justify-content: center;
+}
+.success {
+	background-color: $success;
+	color: black !important;
+	border: 1px solid $success-hover;
+	border-radius: 6px !important;
+	display: flex;
+	justify-content: center;
+}
+button.primary:hover {
+	background-color: $primary-hover !important;
+}
+.danger {
+	background-color: $danger;
+	color: white !important;
+	border: 1px solid $danger-hover;
+	border-radius: 6px !important;
+	display: flex;
+	justify-content: center;
+}
+button.danger:hover {
+	background-color: $danger-hover;
+}
+.warning {
+	background-color: $warning;
+	border: 1px solid $warning-hover !important;
+	border-radius: 6px !important;
+	display: flex;
+	justify-content: center;
+}
+button.warning:hover {
+	background-color: $warning-hover;
+}
+
+.background-grey {
+	background-color: $background-grey;
+}
+.background-primary {
+	background-color: #0d6efd;
+	color: white;
+}
+
+.logo-home-page {
+	max-width: 120px;
+}
+
+.home-min-height {
+	min-height: 250px;
+}
+
+td,
+th {
+	text-align: center !important;
+	vertical-align: middle;
+}
+
+.icon {
+	height: 1em;
+	width: 1em;
+}
+.icon-black {
+	filter: gray saturate(0%) brightness(70%) contrast(1000%);
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
+
+.sp-bt {
+	justify-content: space-between;
+}
+.pe-pointer {
+	cursor: pointer;
+}
+.m2 {
+	margin-left: 2%;
+	margin-right: 2%;
+}
+::-webkit-input-placeholder {
+	font-style: italic;
+}
+:-moz-placeholder {
+	font-style: italic;
+}
+::-moz-placeholder {
+	font-style: italic;
+}
+:-ms-input-placeholder {
+	font-style: italic;
+}

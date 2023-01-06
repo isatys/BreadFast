@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  firstname  String
+  lastname  String
+  password     String
+  company   Company[]
+  phone     String
+  createdAt  DateTime   @default(now())
+  role    Role     @default(USER)
+  status Status @default(pending)
+  type Type @default(animator)
+  deleted Boolean @default(false)
+}
+
+model Company {
+  id    Int     @id @default(autoincrement())
+  user_id Int
+  name String
+  createdAt  DateTime   @default(now())
+  deleted Boolean @default(false)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  pending
+  refuse
+  validate
+}
+
+enum Type {
+  bakery
+}
+
+model Session {
+    id        String   @id
+    sid       String   @unique
+    data      String  @db.VarChar(500)
+    expiresAt   DateTime
+}

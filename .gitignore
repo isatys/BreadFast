@@ -1,0 +1,17 @@
+# Env files
+.env*
+!.env.example
+
+# Build artifacts
+dist
+
+# Test and coverage artifacts
+.nyc_output
+coverage
+
+# Node modules
+node_modules
+
+# OS files
+.DS_Store
+.vscode

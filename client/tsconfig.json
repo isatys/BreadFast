@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"module": "CommonJS",
+		"target": "es6",
+		"jsx": "react",
+		"allowJs": true,
+		"moduleResolution": "node",
+		"baseUrl": "src",
+		"paths": {
+			"controllers/*": ["application/controllers/*"],
+			"views/*": ["application/views/*"],
+			"reducers/*": ["application/reducers/*"],
+			"utils/*" : ["infrastrucutre/utils/"],
+			"use_cases/*": ["domain/use_cases/*"]
+		}
+	}
+}

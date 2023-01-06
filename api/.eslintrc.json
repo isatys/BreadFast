@@ -1,0 +1,14 @@
+{
+	"extends": ["airbnb", "plugin:prettier/recommended"],
+	"plugins": ["prettier"],
+	"env": {
+		"node": true
+	},
+	"rules": {
+		"prettier/prettier": ["error"],
+		"no-underscore-dangle": "off",
+		"jsx-a11y/label-has-associated-control": [ 2, {
+            "assert": "either"
+        }]
+	}
+}

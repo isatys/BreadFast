@@ -1,0 +1,94 @@
+:root {
+	--input-color: #99a3ba;
+	--input-border: #cdd9ed;
+	--input-background: #fff;
+	--input-placeholder: #cbd1dc;
+	--input-border-focus: #275efe;
+	--group-color: var(--input-color);
+	--group-border: var(--input-border);
+	--group-background: #eef4ff;
+	--group-color-focus: #fff;
+	--group-border-focus: var(--input-border-focus);
+	--group-background-focus: #678efe;
+}
+
+.form-container {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+.input-container {
+	position: relative;
+	display: flex;
+	width: 100%;
+}
+.input-container:not(:last-child) {
+	margin-bottom: 1.5em;
+}
+.input-container {
+	max-width: var(--max-size-input);
+}
+.input-field {
+	display: block;
+	width: 100%;
+	padding: 8px 16px;
+	line-height: 25px;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: inherit;
+	border-radius: 6px;
+	color: var(--input-color);
+	border: 1px solid var(--input-border);
+	background: var(--input-background);
+	transition: border 0.3s ease;
+}
+.input-field::placeholder {
+	color: var(--input-placeholder);
+}
+/* Focus */
+.input-field:focus {
+	outline: none;
+	border-color: var(--input-border-focus);
+}
+.input-container:focus-within > label {
+	color: var(--group-color-focus);
+	background: var(--group-background-focus);
+	border-color: var(--group-border-focus);
+}
+
+/* ADD BORDER RADIUS */
+.input-container > label,
+.input-container.input-field {
+	white-space: nowrap;
+	display: block;
+}
+.input-container > label:not(:first-child):not(:last-child),
+.input-container .input-field:not(:first-child):not(:last-child) {
+	border-radius: 0;
+}
+.input-container > label:first-child,
+.input-container .input-field:first-child {
+	border-radius: 6px 0 0 6px;
+}
+.input-container > label:last-child,
+.input-container .input-field:last-child {
+	border-radius: 0 6px 6px 0;
+}
+
+/* Color label */
+.input-container > label {
+	text-align: center;
+	padding: 8px 12px;
+	font-size: 14px;
+	line-height: 25px;
+	color: var(--group-color);
+	background: var(--group-background);
+	border: 1px solid var(--group-border);
+	transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+.button-container {
+	margin: 1em;
+	display: flex;
+	justify-content: space-around;
+}
