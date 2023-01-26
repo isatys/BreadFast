@@ -4,7 +4,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 module.exports = {
 	apps: [
 		{
-			name: 'B@co-API',
+			name: 'breadfast-API',
 			script: './dist/api.js',
 			env: {
 				NODE_ENV: 'development',

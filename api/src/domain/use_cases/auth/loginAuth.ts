@@ -21,25 +21,19 @@ const loginUser = (
 			throw new InvalidParamError('Mail ou mot de passe incorrect.');
 		}
 
-		if (user.deleted) {
+		if (user.isDeleted) {
 			throw new AccessDeniedError(
 				"L'administrateur a supprimé votre compte"
 			);
+		}
+		if (!user.isValidated) {
+			throw new AccessDeniedError('Veuillez valider votre email.');
 		}
 
 		const isPassword = await BcryptService.compare(user.password, password);
 
 		if (isPassword === false) {
 			throw new InvalidParamError('Mail ou mot de passe incorrect');
-		}
-		if (user.status === 'pending') {
-			throw new AccessDeniedError(
-				"Votre demande d'inscription est en cours de traitement. Vous pourrez accéder à l'application après validation de votre inscription par un administrateur. Vous serez prochainement notifié par mail."
-			);
-		} else if (user.status === 'refuse') {
-			throw new AccessDeniedError(
-				"L'administrateur ne vous a pas accepté"
-			);
 		}
 
 		delete user.password;

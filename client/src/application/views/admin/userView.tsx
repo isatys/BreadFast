@@ -11,42 +11,19 @@ const userView = (props: any) => {
 		showModalConfirmDeleteUser,
 		showModal,
 		onCancel,
-		updateIsAccepted,
-		updateIsRefuse,
 	} = props;
 	return (
-		<section>
+		<>
 			<div className="row offset-3 col-6 justify-content-center fw-bold">
-				Status : {user.status === 'refuse' && <>Refusé</>}
-				{user.status === 'pending' && (
-					<>
-						<div className="row sp-bt">
-							<button
-								type="button"
-								className="clickable btn btn-primary col-5"
-								onClick={() => updateIsAccepted(user.id)}
-							>
-								Valider
-							</button>
-							<button
-								type="button"
-								className="clickable btn btn-danger col-5"
-								onClick={() => updateIsRefuse(user.id)}
-							>
-								Refuser
-							</button>
-						</div>
-					</>
-				)}
-				{user.status === 'validate' && <>Validé</>}
+				profil
 			</div>
 			<div className="row">
 				<div className="col-12 d-flex justify-content-center bold">
-					<section className="form-container">
+					<div className="form-container">
 						{isDeleted && (
-							<section className="warning">
+							<div className="warning">
 								<div className="m-3">Utilisateur supprimé</div>
-							</section>
+							</div>
 						)}
 						<div className="input-container">
 							<label className="firstname">Prénom </label>
@@ -100,56 +77,6 @@ const userView = (props: any) => {
 								disabled
 							/>
 						</div>
-						<hr></hr>
-						<div className="input-container">
-							<label className="company">Company</label>
-							<input
-								className="input-field"
-								type="text"
-								name="company"
-								placeholder="Astredhor"
-								defaultValue={user.company}
-								disabled
-							/>
-						</div>
-						<div className="input-container">
-							<label
-								className="company_logo"
-								htmlFor="company_logo"
-							>
-								Logo d'entreprise
-							</label>
-							<input
-								className="input-field"
-								type="file"
-								name="company_logo"
-								placeholder="Astredhor"
-								accept="image/png, image/jpeg"
-							/>
-						</div>
-						<div className="input-container">
-							<label className="certification">
-								Certification number
-							</label>
-							<input
-								className="input-field"
-								type="text"
-								name="certification"
-								placeholder="0123456789123456"
-							/>
-						</div>
-						<div className="input-container">
-							<label className="certification_doc">
-								Certification document
-							</label>
-							<input
-								className="input-field"
-								type="file"
-								name="certification_doc"
-								placeholder="caca"
-							/>
-						</div>
-
 						<div className="button-container">
 							<button
 								className="danger"
@@ -160,16 +87,8 @@ const userView = (props: any) => {
 								Supprimer l'utilisateur
 							</button>
 							{/* updateUserStatus */}
-							<button
-								className="primary"
-								type="button"
-								onClick={() => updateUserStatus(user.id)}
-								disabled={isDeleted}
-							>
-								Modifier le status
-							</button>
 						</div>
-					</section>
+					</div>
 				</div>
 			</div>
 			{showModalConfirmDeleteUser === true && (
@@ -180,7 +99,7 @@ const userView = (props: any) => {
 					onConfirm={deleteUser}
 				/>
 			)}
-		</section>
+		</>
 	);
 };
 

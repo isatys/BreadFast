@@ -1,10 +1,10 @@
-import { exit } from 'process';
-
 const getUsersUseCase = require('../../domain/use_cases/user/getUsers');
 const getUserUseCase = require('../../domain/use_cases/user/getUser');
 const getUserByIdUseCase = require('../../domain/use_cases/user/getUserById');
-const updateUserStatusUseCase = require('../../domain/use_cases/admin/updateUserStatus');
 const deleteUserUseCase = require('../../domain/use_cases/admin/deleteUser');
+const validateUserEmailUseCase = require('../../domain/use_cases/validateUserEmail/validateUserEmail');
+const sendValidateUserEmailUseCase = require('../../domain/use_cases/validateUserEmail/validateSendEmail');
+const UpdateUserUseCase = require('../../domain/use_cases/user/updateUser');
 
 const userController = (dependencies: any) => {
 	const {
@@ -13,6 +13,8 @@ const userController = (dependencies: any) => {
 		userRepository,
 		mailService,
 		sessionService,
+		validateUserEmailRepository,
+		uuidService,
 	} = dependencies;
 
 	const getUsers = (req: any, res: any, next: any) => {
@@ -47,25 +49,6 @@ const userController = (dependencies: any) => {
 				res.status(200).json(response);
 			},
 			(err: any) => {
-				console.log(err);
-				next(err);
-			}
-		);
-	};
-	const updateUserStatus = (req: any, res: any, next: any) => {
-		const userid: number = req.body.userid;
-		const status: string = req.body.status;
-
-		const updateUserStatusCommand =
-			updateUserStatusUseCase.updateUserStatus(
-				userRepository,
-				mailService
-			);
-		updateUserStatusCommand.execute(userid, status).then(
-			(response: any) => {
-				res.status(200).json(response);
-			},
-			(err: any) => {
 				next(err);
 			}
 		);
@@ -82,13 +65,62 @@ const userController = (dependencies: any) => {
 			}
 		);
 	};
+	const validateUserEmail = (req: any, res: any, next: any) => {
+		const userid: number = req.body.userid;
+		const uuid: string = req.body.uuid;
+		const validateUserEmailCommand =
+			validateUserEmailUseCase.validateUserEmail(
+				validateUserEmailRepository,
+				userRepository
+			);
+		validateUserEmailCommand.execute(userid, uuid).then(
+			(response: any) => {
+				res.status(200).json(response);
+			},
+			(err: any) => {
+				next(err);
+			}
+		);
+	};
+	const sendValidateEmail = (req: any, res: any, next: any) => {
+		const email: string = req.body.email;
+		const validateUserEmailCommand =
+			sendValidateUserEmailUseCase.sendValidateEmail(
+				validateUserEmailRepository,
+				userRepository,
+				mailService,
+				uuidService
+			);
+		validateUserEmailCommand.execute(email).then(
+			(response: any) => {
+				res.status(200).json(response);
+			},
+			(err: any) => {
+				next(err);
+			}
+		);
+	};
+	const updateUser = (req: any, res: any, next: any) => {
+		const { userid, data } = req.body;
+		const UpdateUserCommand = UpdateUserUseCase.updateUser(userRepository);
+		UpdateUserCommand.execute(userid, data).then(
+			(response: any) => {
+				res.status(200).json(response);
+			},
+			(err: any) => {
+				next(err);
+			}
+		);
+	};
 
 	return {
 		getUsers,
 		// getUser,
-		updateUserStatus,
 		getUserById,
 		deleteUser,
+		validateUserEmail,
+		sendValidateEmail,
+		updateUser,
 	};
 };
 

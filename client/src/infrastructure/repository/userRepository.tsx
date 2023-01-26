@@ -9,9 +9,9 @@ export class UserRepository {
 				url: `/user/${userid}`,
 				method: 'get',
 			};
-			const adisseoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return adisseoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})
@@ -26,9 +26,9 @@ export class UserRepository {
 				url: '/user/users',
 				method: 'get',
 			};
-			const bacoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return bacoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})
@@ -47,9 +47,30 @@ export class UserRepository {
 					status,
 				},
 			};
-			const adisseoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return adisseoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
+				.then((result: any) => {
+					resolve(result.data);
+				})
+				.catch((error: any) => {
+					reject(error);
+				});
+		});
+	}
+	updateUser(userid: number, data: Array<string>) {
+		return new Promise((resolve, reject) => {
+			const requestOptions = {
+				url: '/user/update',
+				method: 'post',
+				data: {
+					userid,
+					data,
+				},
+			};
+			const _apiInstance = createAxiosInstance();
+
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})
@@ -67,9 +88,9 @@ export class UserRepository {
 					userid,
 				},
 			};
-			const bacoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return bacoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})

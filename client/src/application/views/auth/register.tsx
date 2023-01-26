@@ -1,199 +1,147 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import ModalView from '../layout/modal';
-import register from '../../../domain/messages/register';
+import userIcon from '../../assets/icons/user.svg';
+import lockIcon from '../../assets/icons/lock.svg';
+import chevronIcon from '../../assets/icons/chevron-right.svg';
+import emailIcon from '../../assets/icons/envelope.svg';
+import phoneIcon from '../../assets/icons/phone.svg';
 
-function RegisterView(props:any) {
-	const { onChange, onSubmit, isRegister, showModal, onCancel, errorRegister, onChangeLogo, addCertification, certifications, onChangeCertification, onShowCertification, checkCertification } = props;
+function RegisterView(props: any) {
+	const { onChange, onSubmit, errorRegister, isRegister } = props;
 
 	return (
 		<section className="form-container">
-			<form onSubmit={onSubmit}>
-				{errorRegister && (
-					<section className="warning">
-						<div className="m-3">{errorRegister}</div>
-					</section>
-				)}
-				<div className="input-container">
-					<label className="firstname" htmlFor="firstname">Prénom *</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="text"
-						name="firstname"
-						placeholder="John"
-						id="firstname"
-						required
-					/>
-				</div>
-				<div className="input-container">
-					<label className="lastname">Nom *</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="text"
-						name="lastname"
-						placeholder="Doe"
-						required
-					/>
-				</div>
-				<div className="input-container">
-					<label className="email">Email *</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="email"
-						name="email"
-						placeholder="John.Doe@astredhor.com"
-						required
-					/>
-				</div>
-				<div className="input-container">
-					<label className="phone">Téléphone *</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="tel"
-						name="phone"
-						placeholder="33601020304"
-						required
-					/>
-				</div>
-				<div className="input-container">
-					<label className="phone_secondary">
-						Téléphone secondaire
-					</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="tel"
-						name="phone_secondary"
-						placeholder="33601020304"
-					/>
-				</div>
-				<div className="input-container">
-					<label className="password">Password * </label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="password"
-						name="password"
-						placeholder="********"
-					/>
-				</div>
-				<div className="input-container">
-					<label className="repeat_password">Repeat Password *</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="password"
-						name="repeat_password"
-						placeholder="********"
-					/>
-				</div>
-				<hr></hr>
-				<div className="input-container">
-					<label className="company">Company</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="text"
-						name="company"
-						placeholder="Astredhor"
-					/>
-				</div>
-				<div className="input-container">
-					<label className="company_logo" htmlFor="company_logo">
-						Logo d'entreprise
-					</label>
-					<input
-						onChange={onChangeLogo}
-						className="input-field"
-						type="file"
-						name="company_logo"
-						placeholder="Astredhor"
-						accept="image/png, image/jpeg"
-					/>
-				</div>
-
-				<div className='input-container'>
-						Vous êtes conseiller : Votre entreprise dispose d'un agrément et vous êtes certifié
-					<input type="checkbox" id="conseiller" name="conseiller" onChange={onShowCertification} checked={checkCertification}/>
-				</div>
-
-				{certifications && certifications.map((certification:object, key:number) =>
-					<div key={key}>
-						<div className="input-container">
-							<label className="certification">
-								Numéro de certificat
-							</label>
-							<input
-								onChange={onChangeCertification}
-								className="input-field"
-								type="text"
-								name="certification"
-								placeholder="0123456789123456"
-								data-n-certification={key}
-							/>
-						</div>
-						<div className="input-container">
-							<label className="certification">
-								Date limite de validité
-							</label>
-							<input
-								onChange={onChangeCertification}
-								className="input-field"
-								type="date"
-								name="certification_date"
-								data-n-certification={key}
-							/>
-						</div>
-						<div className="input-container">
-							<label className="certification_doc">
-								Certification document
-							</label>
-							<input
-								onChange={onChangeCertification}
-								className="input-field"
-								type="file"
-								name="certification_doc"
-								accept="image/png, image/jpeg"
-								data-n-certification={key}
-							/>
-						</div>
+			<div className="container">
+				<div className="screen">
+					<div className="screen__content">
+						<form className="register" onSubmit={onSubmit}>
+							<div className="login__field">
+								<img
+									src={userIcon}
+									alt="userIcon"
+									className="login__icon"
+								/>
+								<input
+									onChange={onChange}
+									type="text"
+									name="firstname"
+									className="login__input"
+									placeholder="Firstname"
+									required
+								/>
+							</div>
+							<div className="login__field">
+								<img
+									src={userIcon}
+									alt="userIcon"
+									className="login__icon"
+								/>
+								<input
+									onChange={onChange}
+									type="text"
+									name="lastname"
+									className="login__input"
+									placeholder="Lastname"
+									required
+								/>
+							</div>
+							<div className="login__field">
+								<img
+									src={emailIcon}
+									alt="emailIcon"
+									className="login__icon"
+								/>
+								<input
+									onChange={onChange}
+									type="email"
+									name="email"
+									className="login__input"
+									placeholder="Email"
+									required
+								/>
+							</div>
+							<div className="login__field">
+								<img
+									src={phoneIcon}
+									alt="phoneIcon"
+									className="login__icon"
+								/>
+								<input
+									onChange={onChange}
+									type="tel"
+									name="phone"
+									className="login__input"
+									placeholder=" +33 6 01 02 03 04"
+									required
+								/>
+							</div>
+							<div className="login__field">
+								<img
+									src={lockIcon}
+									alt="lockIcon"
+									className="login__icon"
+								/>
+								<input
+									className="login__input"
+									onChange={onChange}
+									type="password"
+									name="password"
+									placeholder="Password"
+									required
+								/>
+								<small className="password-info">
+									Minimum 12 caractères, avec majuscule,
+									minuscule et un chiffre *
+								</small>
+							</div>
+							<div className="login__field">
+								<img
+									src={lockIcon}
+									alt="lockIcon"
+									className="login__icon"
+								/>
+								<input
+									className="login__input"
+									onChange={onChange}
+									type="password"
+									name="repeatPassword"
+									placeholder="repeat password"
+									required
+								/>
+							</div>
+							{isRegister && (
+								<section className="success">
+									<>
+										Inscription prise en compte merci de
+										vérifier votre email
+									</>
+								</section>
+							)}
+							{errorRegister && (
+								<section className="error">
+									<div>{errorRegister}</div>
+								</section>
+							)}
+							<button className="button login__submit">
+								<span className="button__text">
+									SIGN UP Now
+								</span>
+								<img
+									src={chevronIcon}
+									alt="chevronIcon"
+									className="button__icon"
+								/>
+							</button>
+						</form>
 					</div>
-				)}
-
-				{certifications && certifications.length > 0 && 
-					<div className="input-container">
-						<button
-							onClick={addCertification}
-							className="input-field"
-							type="button"
-							name="certification_doc"
-						>
-							Ajouter certification
-						</button>
+					<div className="screen__background">
+						<span className="screen__background__shape screen__background__shape4"></span>
+						<span className="screen__background__shape screen__background__shape3"></span>
+						<span className="screen__background__shape screen__background__shape2"></span>
+						<span className="screen__background__shape screen__background__shape1"></span>
 					</div>
-				}
-
-				<div className="button-container">
-					<Link to="/">
-						<button className="warning" type="button">
-							Annuler
-						</button>
-					</Link>
-					<button className="primary">Inscription</button>
 				</div>
-			</form>
-
-			{isRegister &&
-				<ModalView 
-					showModal={showModal}
-					data={register}
-					onCancel={onCancel}
-				/>
-			}
+			</div>
 		</section>
 	);
 }

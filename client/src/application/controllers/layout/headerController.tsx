@@ -1,22 +1,34 @@
 import * as React from 'react';
 import Header from '../../views/layout/header';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 function HeaderController() {
 	const { isLogged, user } = useSelector(({ authReducer }) => {
 		return authReducer;
 	});
-	const navigate = useNavigate();
+
+	const [isAdmin, setIsAdmin] = React.useState(false);
+	const [isMobileBtn, setIsMobileBtn] = React.useState(false);
+
 	React.useEffect(() => {
-		if (isLogged === false) {
-			const path = '/';
-			navigate(path);
+		if (user && user.role === 'ADMIN') {
+			setIsAdmin(true);
 		}
-	}, [isLogged]);
-	let isAdmin = false;
-	if (user && user.role == 'ADMIN') isAdmin = true;
-	return <Header isAdmin={isAdmin} isLogged={isLogged} user={user} />;
+	}, [user]);
+
+	const onMobileBtnClick = () => {
+		setIsMobileBtn(!isMobileBtn);
+	};
+
+	return (
+		<Header
+			isAdmin={isAdmin}
+			isLogged={isLogged}
+			user={user}
+			isMobileBtn={isMobileBtn}
+			onMobileBtnClick={onMobileBtnClick}
+		/>
+	);
 }
 
 export default HeaderController;

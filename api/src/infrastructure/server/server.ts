@@ -8,6 +8,7 @@ const buildDependencies = require('../config/repositories');
 
 const { authRoutes } = require('../../application/routes/auth');
 const { userRoutes } = require('../../application/routes/user');
+const { bakeryRoutes } = require('../../application/routes/bakery');
 
 const errorHandler = require('../../utils/errorHandler');
 
@@ -54,9 +55,9 @@ export default function createServer(env: any, session: any) {
 			extended: true,
 		})
 	);
-
 	server.use('/auth', authRoutes(dependencies));
 	server.use('/user', userRoutes(dependencies));
+	server.use('/bakery', bakeryRoutes(dependencies));
 
 	server.use(errorHandler);
 

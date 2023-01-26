@@ -6,7 +6,6 @@ import { AnyAction } from 'redux';
 
 import AdminView from '../../views/admin/adminView';
 import { GetUsers } from '../../../domain/use_cases/user/getUsers';
-import { UpdateUserStatus } from '../../../domain/use_cases/admin/updateUserStatus';
 import { UserRepository } from '../../../infrastructure/repository/userRepository';
 
 function AdminController() {
@@ -32,10 +31,6 @@ function AdminController() {
 		}
 	}, [isLoadingUsers, isDeleted]);
 
-	const updateIsAccepted = (userid: number) => {
-		const UpdateUserStatusUseCase = new UpdateUserStatus(userRepository);
-		dispatch(UpdateUserStatusUseCase.execute(userid, 'validate'));
-	};
 	// ne marche pas sur la date
 	const sortList = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const name = event.currentTarget.id;
@@ -50,13 +45,7 @@ function AdminController() {
 		);
 	};
 
-	return (
-		<AdminView
-			users={usersSorts}
-			updateIsAccepted={updateIsAccepted}
-			sortList={sortList}
-		/>
-	);
+	return <AdminView users={usersSorts} sortList={sortList} />;
 }
 
 export default AdminController;

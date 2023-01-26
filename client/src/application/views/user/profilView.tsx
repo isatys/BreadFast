@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import User from '../../entities/user';
 const profilView = (props: any) => {
 	const { user, logout, onChange } = props;
-	//console.log(user);
 	return (
 		<>
 			<div className="row justify-content-center">profilView</div>
@@ -76,53 +75,6 @@ const profilView = (props: any) => {
 						placeholder="33601020304"
 					/>
 				</div>
-				{/* <hr></hr>
-				<div className="input-container">
-					<label className="company">Company</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="text"
-						name="company"
-						placeholder="Astredhor"
-					/>
-				</div>
-				<div className="input-container">
-					<label className="company_logo" htmlFor="company_logo">
-						Logo d'entreprise
-					</label>
-					<input
-						className="input-field"
-						type="file"
-						name="company_logo"
-						placeholder="Astredhor"
-						accept="image/png, image/jpeg"
-					/>
-				</div>
-				<div className="input-container">
-					<label className="certification">
-						Certification number
-					</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="text"
-						name="certification"
-						placeholder="0123456789123456"
-					/>
-				</div>
-				<div className="input-container">
-					<label className="certification_doc">
-						Certification document
-					</label>
-					<input
-						onChange={onChange}
-						className="input-field"
-						type="file"
-						name="certification_doc"
-						placeholder="caca"
-					/>
-				</div> */}
 
 				<div className="button-container">
 					<button className="danger" type="button" onClick={logout}>

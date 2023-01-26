@@ -8,6 +8,11 @@ const htmlTemplateValidateUser = require('../../utils/mailTemplate/templateValid
 const htmlTemplateUserToAdmin = require('../../utils/mailTemplate/templateUserToAdmin');
 const htmlTemplateAdminToUser = require('../../utils/mailTemplate/templateAdminToUser');
 const htmlTemplateRejectUser = require('../../utils/mailTemplate/templateRejectUser');
+const htmlTemplateValidateEmail = require('../../utils/mailTemplate/auth/templateValidateEmail');
+
+interface Info {
+	messageId: string;
+}
 
 // async..await is not allowed in global scope, must use a wrapper
 module.exports = class MailService extends IMailService {
@@ -31,9 +36,6 @@ module.exports = class MailService extends IMailService {
 	}
 
 	async send(to: Array<User>, element: any, type: string) {
-		if (process.env.NODE_ENV === 'development') {
-			return this.sendFake(to, element, type);
-		}
 		let toText = '';
 		let subject = '';
 		let msg = '';
@@ -65,19 +67,42 @@ module.exports = class MailService extends IMailService {
 				msg = htmlTemplateRejectUser(element);
 				subject = 'Demande non approuvé';
 				break;
+			case 'validate-email':
+				msg = htmlTemplateValidateEmail(element);
+				subject = 'Validation de votre email';
+				break;
 			default:
 				msg = '';
 				subject = '';
 				toText = '';
 				break;
 		}
-
-		const info = await this.transporter.sendMail({
-			from: '"AstreDhor info" <noreply@.com>', // sender address
-			to: toText, // list of receivers
-			subject, // Subject line
-			html: msg, // plain text body // html body
-		});
+		let info: Info;
+		if (process.env.NODE_ENV === 'development') {
+			let testAccount = await nodemailer.createTestAccount();
+			let transporter = nodemailer.createTransport({
+				host: 'smtp.ethereal.email',
+				port: 587,
+				secure: false, // true for 465, false for other ports
+				auth: {
+					user: testAccount.user, // generated ethereal user
+					pass: testAccount.pass, // generated ethereal password
+				},
+			});
+			info = await transporter.sendMail({
+				from: '"Fred Foo 👻" <foo@example.com>', // sender address
+				to: toText, // list of receivers
+				subject, // Subject line
+				html: msg,
+			});
+		} else {
+			info = await this.transporter.sendMail({
+				from: '"breadfast" <noreply@.com>', // sender address
+				to: toText, // list of receivers
+				subject, // Subject line
+				html: msg, // plain text body // html body
+			});
+		}
 
 		/* eslint-disable no-console */
 		console.log('Message sent: %s', info.messageId);
@@ -86,72 +111,5 @@ module.exports = class MailService extends IMailService {
 		// Preview only available when sending through an Ethereal account
 		console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 		return info;
-	}
-	async sendFake(to: Array<User>, element: any, type: string) {
-		console.log(element);
-
-		let testAccount = await nodemailer.createTestAccount();
-		let toText = '';
-		let subject = '';
-		let msg = '';
-		to.forEach((user: User) => {
-			toText += `${user.email} , `;
-		});
-
-		switch (type) {
-			case 'register':
-				msg = htmlTemplateRegister(element);
-				subject = 'Nouvelle inscription';
-				break;
-			case 'forgot-password':
-				msg = htmlTemplateForgotPassword(element);
-				subject = 'Mot de passe oublié';
-				break;
-			case 'validate-user':
-				msg = htmlTemplateValidateUser(element);
-				subject = 'Utilisateur validé';
-				break;
-			case 'user-to-admin':
-				msg = htmlTemplateUserToAdmin(element);
-				subject = 'Ajout administrateur';
-				break;
-			case 'admin-to-user':
-				msg = htmlTemplateAdminToUser(element);
-				subject = 'Retrait administrateur';
-				break;
-			case 'reject-user':
-				msg = htmlTemplateRejectUser(element);
-				subject = 'Demande non approuvé';
-				break;
-			default:
-				msg = '';
-				subject = '';
-				toText = '';
-				break;
-		}
-		// create reusable transporter object using the default SMTP transport
-		let transporter = nodemailer.createTransport({
-			host: 'smtp.ethereal.email',
-			port: 587,
-			secure: false, // true for 465, false for other ports
-			auth: {
-				user: testAccount.user, // generated ethereal user
-				pass: testAccount.pass, // generated ethereal password
-			},
-		});
-
-		// send mail with defined transport object
-		let info = await transporter.sendMail({
-			from: '"Fred Foo 👻" <foo@example.com>', // sender address
-			to: toText, // list of receivers
-			subject, // Subject line
-			html: msg,
-		});
-
-		console.log('Message sent: %s', info.messageId);
-		// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-		// Preview only available when sending through an Ethereal account
-		console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 	}
 };

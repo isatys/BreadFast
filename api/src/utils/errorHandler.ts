@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const errorHandler = (error:any, req:any, res:any, next:any) => {
+const errorHandler = (error: any, req: any, res: any, next: any) => {
 	if (error) {
 		if (error.code) {
 			return res.status(error.code).json({

@@ -10,25 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  firstname  String
-  lastname  String
-  password     String
-  company   String?
-  company_logo   String?
-  phone     String
-  phone_secondary     String?
-}
-
-
-
-
-
 model Session {
-    id        String   @id
-    sid       String   @unique
-    data      String  @db.VarChar(500)
-    expiresAt   DateTime
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt   DateTime
 }

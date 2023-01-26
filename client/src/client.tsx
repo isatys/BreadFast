@@ -21,8 +21,6 @@ const PORT = process.env.PORT || 3000;
 const ENV = process.env.NODE_ENV || 'developpement';
 server.use(express.static(`${__dirname}/../static`));
 
-server.use(express.static(`${__dirname}/../static`));
-
 server.use(
 	session({
 		secret: process.env.SESSION_SECRET,
@@ -43,7 +41,11 @@ server.use(
 
 server.get('*', (req, res) => {
 	const initialState = {
-		authReducer: { user: req.session.user, isLogged: !!req.session.user },
+		authReducer: {
+			user: req.session.user,
+			isLogged: !!req.session.user,
+			isResendSuccess: false,
+		},
 	};
 
 	const location = req.url;
@@ -64,7 +66,7 @@ server.get('*', (req, res) => {
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1">
-				<title>B@CO</title>
+				<title>BreadFast</title>
 				<link rel="icon" href="data:,">
 				${linkTags}
 				${styleTags}

@@ -20,7 +20,7 @@ module.exports = class BcryptService {
 
 		// return pwd;
 
-		var specials = '!@#$%^&*()_+{}:"<>?|[];\',./`~';
+		var specials = '@#$%^&*()_+{}:"?|,./`~';
 		var lowercase = 'abcdefghijklmnopqrstuvwxyz';
 		var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		var numbers = '0123456789';

@@ -1,64 +1,94 @@
-$primary: #1b7ced;
+header {
+	border-bottom: 1px solid white;
+}
 
 .header {
-	overflow: hidden;
-	background-color: #f1f1f1;
-	padding: 20px 10px;
+	margin: 0.5em 1em 0.5em 1em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.header a {
-	float: left;
-	color: black;
-	text-align: center;
-	padding: 12px;
-	text-decoration: none;
-	font-size: 18px;
-	line-height: 25px;
-	border-radius: 4px;
-	margin: 0 0.5em 0 0.5em;
-}
-
-.header a.logo {
-	font-size: 25px;
-	font-weight: bold;
-}
-
-.header a:hover {
-	background-color: #ddd;
-	color: black;
-	cursor: pointer;
-}
-
-/* Style the active/current link*/
-.header a.active {
-	background-color: $primary;
-	color: white;
-}
-
-/* Float the link section to the right */
-.header-right {
+.header-btn-container {
 	float: right;
 	display: flex;
 }
-.header-welcome {
-	margin: auto;
-	text-align: center;
-	display: flex;
+
+.logo {
+	cursor: pointer;
 }
 
-.header-user {
-	overflow: hidden;
-	background-color: #9b9898;
-	padding: 20px 10px;
-	-webkit-border-bottom-right-radius: 15px;
-	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-bottomright: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	border-bottom-right-radius: 15px;
-	border-bottom-left-radius: 15px;
+.logo img {
+	width: 80px;
+	height: auto;
 }
-.header-user > div > div {
-	margin: auto;
-	color: white;
-	font-weight: 500;
+
+.nav {
+	list-style: none;
+}
+
+.nav-item {
+	display: inline-block;
+	margin-right: 30px;
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.nav-item a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.nav-item:hover a {
+	color: #29a396;
+	transition: 0.3s linear;
+}
+
+.nav-item:last-of-type {
+	margin-right: 0;
+}
+
+.mobile-btn {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.header-btn-container {
+		font-size: 2em;
+	}
+	.mobile-btn {
+		width: 3em;
+		border: none;
+		background: none;
+		cursor: pointer;
+		display: inline;
+	}
+	.btn {
+		font-size: 0.5em !important;
+	}
+	.nav {
+		display: none;
+		position: fixed;
+		top: 4rem;
+		right: 1em;
+		border: 1px solid black;
+		z-index: 99999;
+		background: black;
+	}
+	.nav > ul > li {
+		text-align: center;
+		border-bottom: #fff 1px solid;
+		padding: 1em;
+	}
+	.nav > ul {
+		display: flex;
+		flex-direction: column;
+	}
+	.show {
+		display: block;
+	}
+
+	.nav-item {
+		margin-right: 0;
+	}
 }

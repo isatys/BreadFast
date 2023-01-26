@@ -1,46 +1,33 @@
+import { UserRegister } from '../../domain/entities/user';
+
 const RegisterAuthUseCase = require('../../domain/use_cases/auth/registerAuth');
 const LoginAuthUseCase = require('../../domain/use_cases/auth/loginAuth');
 const forgotPasswordAuthUseCase = require('../../domain/use_cases/auth/forgotAuth');
 const LogoutAuthUseCase = require('../../domain/use_cases/auth/logoutAuth');
-import FileService from '../../infrastructure/services/file';
 
 const authController = (dependencies: any) => {
 	const {
 		authRepository,
-		bcryptService,
 		userRepository,
+		validateUserEmailRepository,
+		bcryptService,
 		mailService,
 		sessionService,
+		uuidService,
 	} = dependencies;
 
 	const registerAuth = (req: any, res: any, next: any) => {
+		const user: UserRegister = req.body;
 		const RegisterCommand = RegisterAuthUseCase.registerUser(
 			authRepository,
-			bcryptService,
+			validateUserEmailRepository,
 			userRepository,
-			FileService,
+			bcryptService,
+			uuidService,
 			mailService
 		);
 
-		const user = {
-			lastname: req.body.lastname,
-			firstname: req.body.firstname,
-			email: req.body.email,
-			phone: req.body.phone,
-			phone_secondary: req.body.phone_secondary,
-			company: req.body.company,
-			password: req.body.password,
-			type:
-				req.body.checkCertification === 'false'
-					? 'animator'
-					: 'conseil',
-		};
-
-		const files = req.files;
-		const certifications = req.body.certifications
-			? JSON.parse(req.body.certifications)
-			: null;
-		RegisterCommand.execute(user, files, certifications).then(
+		RegisterCommand.execute(user).then(
 			(response: any) => {
 				res.status(200).json(response);
 			},

@@ -2,6 +2,7 @@ import authConstants from '../../domain/constants/auth.constants';
 
 const initialState = {
 	isLogged: false,
+	isResendSuccess: false,
 };
 // eslint-disable-next-line default-param-last
 const authReducer = (state = initialState, action: any) => {
@@ -16,6 +17,12 @@ const authReducer = (state = initialState, action: any) => {
 		FORGOT_ERROR,
 		FORGOT_SUCCESS,
 		LOGOUT_SUCCESS,
+		VALIDATE_USER_EMAIL_STARTED,
+		VALIDATE_USER_EMAIL_SUCCESS,
+		VALIDATE_USER_EMAIL_ERROR,
+		SEND_VALIDATE_USER_EMAIL_STARTED,
+		SEND_VALIDATE_USER_EMAIL_SUCCESS,
+		SEND_VALIDATE_USER_EMAIL_ERROR,
 	} = authConstants;
 	switch (action.type) {
 		case REGISTER_STARTED:
@@ -52,6 +59,7 @@ const authReducer = (state = initialState, action: any) => {
 				...state,
 				isLoading: false,
 				isLogged: true,
+				user: action.user,
 			};
 		case LOGIN_ERROR:
 			return {
@@ -82,10 +90,47 @@ const authReducer = (state = initialState, action: any) => {
 				isLoading: false,
 				isForgot: false,
 			};
+		case VALIDATE_USER_EMAIL_STARTED:
+			return {
+				...state,
+				errorValidate: '',
+				isValidate: false,
+			};
+		case VALIDATE_USER_EMAIL_SUCCESS:
+			return {
+				...state,
+				isValidate: true,
+			};
+		case VALIDATE_USER_EMAIL_ERROR:
+			return {
+				...state,
+				errorValidate: action.error,
+				isValidate: false,
+			};
 		case LOGOUT_SUCCESS:
 			return {
 				...state,
 				isLogged: false,
+			};
+		case SEND_VALIDATE_USER_EMAIL_STARTED:
+			return {
+				...state,
+				errorValidate: '',
+				isResendLoading: true,
+				isResendSuccess: false,
+			};
+		case SEND_VALIDATE_USER_EMAIL_SUCCESS:
+			return {
+				...state,
+				isResendLoading: false,
+				isResendSuccess: true,
+			};
+		case SEND_VALIDATE_USER_EMAIL_ERROR:
+			return {
+				...state,
+				errorValidate: action.error,
+				isResendLoading: false,
+				isResendSuccess: false,
 			};
 		default:
 			return state;

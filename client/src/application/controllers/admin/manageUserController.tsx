@@ -10,7 +10,6 @@ import Loader from '../../views/components/loader';
 import Error from '../../views/components/error';
 import { GetUser } from '../../../domain/use_cases/user/getUser';
 import { DeleteUser } from '../../../domain/use_cases/admin/deleteUser';
-import { UpdateUserStatus } from '../../../domain/use_cases/admin/updateUserStatus';
 import { UserRepository } from '../../../infrastructure/repository/userRepository';
 
 function ManageUserController() {
@@ -42,14 +41,6 @@ function ManageUserController() {
 	const onCancel = () => {
 		setshowModalConfirmDeleteUser(false);
 	};
-	const updateIsAccepted = (userid: number) => {
-		const UpdateUserStatusUseCase = new UpdateUserStatus(userRepository);
-		dispatch(UpdateUserStatusUseCase.execute(userid, 'validate'));
-	};
-	const updateIsRefuse = (userid: number) => {
-		const UpdateUserStatusUseCase = new UpdateUserStatus(userRepository);
-		dispatch(UpdateUserStatusUseCase.execute(userid, 'refuse'));
-	};
 
 	if (isLoadingUser) {
 		return <Loader />;
@@ -64,8 +55,6 @@ function ManageUserController() {
 				onCancel={onCancel}
 				showModal={showModal}
 				showModalConfirmDeleteUser={showModalConfirmDeleteUser}
-				updateIsAccepted={updateIsAccepted}
-				updateIsRefuse={updateIsRefuse}
 			/>
 		);
 	}

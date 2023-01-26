@@ -4,35 +4,23 @@ export default interface User {
 	firstname: string;
 	email: string;
 	phone: string;
-	phone_secondary: string;
-	company: string;
-	company_logo: string;
-	certification: string;
-	certification_doc: string;
 	password?: string;
-	createdAt: string;
 	role: string;
-	status: string;
-	deleted: boolean;
+	createdAt: string;
+	isDeleted: boolean;
+	isValidated: boolean;
 }
-export interface UserRegsitration {
-	email: string;
+export interface UserRegister {
 	lastname: string;
 	firstname: string;
-	password: string;
-	repeat_password: string;
+	email: string;
 	phone: string;
-	phone_secondary: string;
-	company: string;
-	company_logo: string;
-	certification: string;
-	certification_doc: string;
-	type: Type;
+	password: string;
+	repeatPassword: string;
 }
+export const Role: { [x: string]: 'ADMIN' | 'USER' } = {
+	ADMIN: 'ADMIN',
+	USER: 'USER',
+};
 
-export const Type: { [x: string]: 'animator' | 'conseil'} = {
-	animator: 'animator',
-	conseil: 'conseil'
-}
-
-export type Type = typeof Type[keyof typeof Type]
+export type Role = (typeof Role)[keyof typeof Role];

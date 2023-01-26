@@ -4,8 +4,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { createReduxStore } from '../../infrastructure/utils/createReduxStore';
 import LayoutController from './layoutController';
 
-
-export function ClientController(props:any) {
+export function ClientController(props: any) {
 	const { initialState, location } = props;
 	const store = createReduxStore(initialState);
 

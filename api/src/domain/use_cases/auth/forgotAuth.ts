@@ -23,11 +23,6 @@ const forgotPassword = (
 				"Aucun utilisateur n'est inscrit avec ce mail."
 			);
 		}
-		if (user.status !== 'validate') {
-			throw new AccessDeniedError(
-				"Votre compte n'est toujours pas validé, vous recevrez un email lorsque l'administrateur vous aura validé."
-			);
-		}
 
 		const password: string = await BcryptService.generate();
 

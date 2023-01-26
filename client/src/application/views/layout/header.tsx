@@ -1,29 +1,57 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import userIcon from '../../assets/icons/user.svg';
+import defaultLogo from '../../assets/img/logo.png';
 
+import btnGrip from '../../assets/icons/grip-lines.svg';
+import btnClose from '../../assets/icons/close.svg';
 function Header(props: any) {
-	const { isAdmin, isLogged, user } = props;
+	const { isAdmin, isLogged, user, onMobileBtnClick, isMobileBtn } = props;
 	return (
 		<header>
 			<div className="header">
-				{isLogged && <Link to="/user">Astredhor et de platine</Link>}
-				{!isLogged && <Link to="/">Astredhor et de platine</Link>}
-				<div className="header-right">
-					{!isLogged && (
-						<Link to="/" className="primary">
-							Accueil
+				<div className="logo">
+					{isLogged && (
+						<Link to="/user">
+							<img src={defaultLogo} alt="logo"></img>
 						</Link>
 					)}
 					{!isLogged && (
+						<Link to="/">
+							<img src={defaultLogo} alt="logo"></img>
+						</Link>
+					)}
+				</div>
+				<div className={'nav ' + (isMobileBtn === true ? 'show' : '')}>
+					<ul>
+						<li className="nav-item">
+							<Link to="/#">coucou cest un text long</Link>
+						</li>
+						<li className="nav-item">
+							<Link to="/#">TTUU</Link>
+						</li>
+						<li className="nav-item">
+							<Link to="/#">TTUU</Link>
+						</li>
+						<li className="nav-item">
+							<Link to="/#">TTUU</Link>
+						</li>
+					</ul>
+				</div>
+
+				<div className="header-btn-container">
+					{!isLogged && (
 						<>
-							<Link to="/register">Inscription</Link>
-							<Link to="/login">Connexion</Link>
+							<Link to="/register" className="btn">
+								Inscription
+							</Link>
+							<Link to="/login" className="btn">
+								Connexion
+							</Link>
 						</>
 					)}
 					{isLogged && (
 						<>
-							{/* <Link to="/user">Dashboard</Link> */}
 							{user && (
 								<>
 									<h5 className="header-welcome">
@@ -47,17 +75,22 @@ function Header(props: any) {
 						</>
 					)}
 				</div>
+				<button
+					className="mobile-btn"
+					onClick={() => onMobileBtnClick()}
+				>
+					{isMobileBtn === false && (
+						<img src={btnGrip} alt="menuTag" className="icon"></img>
+					)}
+					{isMobileBtn === true && (
+						<img
+							src={btnClose}
+							alt="closeMenuTag"
+							className="icon"
+						></img>
+					)}
+				</button>
 			</div>
-			{isLogged && (
-				<div className="header-user">
-					<div className="row text-center">
-						<div className="col-3">Tableau de bord</div>
-						<div className="col-3">Conseiller</div>
-						<div className="col-3">Cahier de cultures</div>
-						<div className="col-3">Veille et documentation</div>
-					</div>
-				</div>
-			)}
 		</header>
 	);
 }

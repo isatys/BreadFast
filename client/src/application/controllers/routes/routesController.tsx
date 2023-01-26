@@ -18,6 +18,13 @@ const LoginController = loadable(
 const ForgotController = loadable(
 	() => import(/* webpackPrefetch: true */ '../auth/forgotController')
 );
+/* istanbul ignore next */
+const ValidateUserEmailController = loadable(
+	() =>
+		import(
+			/* webpackPrefetch: true */ '../auth/validateUserEmailController'
+		)
+);
 
 /* istanbul ignore next */
 const AuthRoutesController = loadable(
@@ -50,6 +57,12 @@ export const routes = [
 		path: '/forgot-password',
 		exact: true,
 		element: <ForgotController />,
+		redirect: false,
+	},
+	{
+		path: '/email/validate/:uuid',
+		exact: false,
+		element: <ValidateUserEmailController />,
 		redirect: false,
 	},
 	{

@@ -1,20 +1,26 @@
 export default interface User {
-	id?: number;
+	id: number;
 	lastname: string;
 	firstname: string;
 	email: string;
 	phone: string;
-	phone_secondary: string;
-	company: string;
-	company_logo: File;
 	password?: string;
-	repeat_password?: string;
-	createdAt?: string;
-	role?: string;
-	status?: string;
-	deleted?: boolean;
+	role: string;
+	createdAt: string;
+	isDeleted: boolean;
+	isValidated: boolean;
 }
+export interface UserRegister {
+	lastname: string;
+	firstname: string;
+	email: string;
+	phone: string;
+	password: string;
+	repeatPassword: string;
+}
+export const Role: { [x: string]: 'ADMIN' | 'USER' } = {
+	ADMIN: 'ADMIN',
+	USER: 'USER',
+};
 
-export interface Users {
-	user: User;
-}
+export type Role = (typeof Role)[keyof typeof Role];

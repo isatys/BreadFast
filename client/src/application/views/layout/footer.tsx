@@ -1,6 +1,10 @@
 import * as React from 'react';
 
 function Footer(props: any) {
-	return <footer>Footer 2023</footer>;
+	return (
+		<footer>
+			<p>&copy; 2023 Martin et les deux zgeg. All Rights Reserved.</p>
+		</footer>
+	);
 }
 export default Footer;

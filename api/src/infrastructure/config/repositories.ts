@@ -1,22 +1,23 @@
 const AuthRepository = require('../database/prisma/repositories/auth');
+const BakeryRepository = require('../database/prisma/repositories/bakery');
 const UserRepository = require('../database/prisma/repositories/user');
-const CertificationRepository = require('../database/prisma/repositories/certification');
+const ValidateUserEmailRepository = require('../database/prisma/repositories/validateUserEmail');
 
 const BcryptService = require('../services/bcrypt');
+const UuidService = require('../services/uuid');
 const SessionService = require('../services/session');
-const MulterService = require('../services/multer');
 const MailService = require('../services/mail');
 
-const buildDependencies = (env:any) => {
+const buildDependencies = (env: any) => {
 	const dependencies = {
 		authRepository: new AuthRepository(),
 		userRepository: new UserRepository(),
-		certificationRepository: new CertificationRepository(),
+		bakeryRepository: new BakeryRepository(),
+		validateUserEmailRepository: new ValidateUserEmailRepository(),
 
 		bcryptService: new BcryptService(),
+		uuidService: new UuidService(),
 		sessionService: new SessionService(),
-
-		multipartBodyService: new MulterService(env.TEMP_DIR_PATH),
 
 		mailService: new MailService(),
 	};

@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-
+import { prisma } from '../../../../utils/db';
 module.exports = class {
 	getUser(email: string) {
 		return new Promise((resolve, reject) => {
@@ -42,46 +40,53 @@ module.exports = class {
 					id: userId,
 				},
 				data: {
-					deleted: true,
+					isDeleted: true,
 				},
 			});
 			resolve(user);
 		});
 	}
-	getAdmins() {
-		return new Promise((resolve, reject) => {
-			const admins = prisma.user.findMany({
-				where: {
-					role: 'ADMIN',
-				},
-				select: {
-					email: true,
-				},
-			});
+	// getAdmins() {
+	// 	return new Promise((resolve, reject) => {
+	// 		const admins = prisma.user.findMany({
+	// 			where: {
+	// 				role: 'ADMIN',
+	// 			},
+	// 			select: {
+	// 				email: true,
+	// 			},
+	// 		});
 
-			resolve(admins);
-		});
-	}
+	// 		resolve(admins);
+	// 	});
+	// }
 	getUsers() {
 		return new Promise((resolve, reject) => {
 			const users = prisma.user.findMany({
 				where: {
-					deleted: false,
+					isDeleted: false,
 				},
 			});
 
 			resolve(users);
 		});
 	}
-	updateUserStatus(userId: number, status: string) {
+	updateUser(userId: number, column: string, value: string) {
+		return new Promise((resolve, reject) => {
+			const user = prisma.$queryRaw`UPDATE user
+            SET ${column} = ${value}
+            WHERE id == ${userId};`;
+			resolve(user);
+		});
+	}
+	isValidated(userId: number) {
 		return new Promise((resolve, reject) => {
 			const user = prisma.user.update({
 				where: {
 					id: userId,
 				},
 				data: {
-					//fonctionne mais rale
-					status: status,
+					isValidated: true,
 				},
 			});
 			resolve(user);

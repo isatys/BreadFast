@@ -9,6 +9,9 @@ const DashboardController = loadable(
 const UserController = loadable(
 	() => import(/* webpackPrefetch: true */ '../user/userController')
 );
+const BakeryController = loadable(
+	() => import(/* webpackPrefetch: true */ '../bakery/bakeryController')
+);
 export const routes = [
 	{
 		path: '/',
@@ -18,6 +21,11 @@ export const routes = [
 	{
 		path: '/profil',
 		element: <UserController />,
+		redirect: false,
+	},
+	{
+		path: '/bakery/create',
+		element: <BakeryController />,
 		redirect: false,
 	},
 ];

@@ -1,54 +1,20 @@
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable class-methods-use-this */
 import { createAxiosInstance } from '../utils/axiosInstance';
-import User from '../../application/entities/user';
-import Certifications from '../../application/entities/certifications';
+import { UserRegister } from '../../application/entities/user';
 
 export class AuthRepository {
-	register(
-		user: User,
-		certifications: Certifications,
-		checkCertification: string
-	) {
+	register(user: UserRegister) {
 		return new Promise((resolve, reject) => {
-			const formData = new FormData();
-
-			if (certifications && certifications.length > 0) {
-				formData.append(
-					'certifications',
-					JSON.stringify(certifications)
-				);
-				certifications.forEach((certification) => {
-					if (certification.certification_doc) {
-						formData.append(
-							'certifications',
-							certification.certification_doc
-						);
-					}
-				});
-			}
-
-			formData.append('firstname', user.firstname);
-			formData.append('lastname', user.lastname);
-			formData.append('email', user.email);
-			formData.append('phone', user.phone);
-			formData.append('phone_secondary', user.phone_secondary);
-			formData.append('company', user.company);
-			formData.append('company_logo', user.company_logo);
-			formData.append('password', user.password);
-			formData.append('checkCertification', checkCertification);
-
 			const requestOptions = {
 				url: '/auth/register',
 				method: 'post',
-				data: formData,
+				data: user,
 			};
 
-			const headers = { 'Content-Type': 'multipart/form-data' };
+			const _apiInstance = createAxiosInstance();
 
-			const bacoApiInstance = createAxiosInstance(headers);
-
-			return bacoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})
@@ -68,9 +34,9 @@ export class AuthRepository {
 				},
 			};
 
-			const bacoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return bacoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})
@@ -89,9 +55,9 @@ export class AuthRepository {
 				},
 			};
 
-			const bacoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return bacoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})
@@ -107,9 +73,9 @@ export class AuthRepository {
 				method: 'post',
 			};
 
-			const bacoApiInstance = createAxiosInstance();
+			const _apiInstance = createAxiosInstance();
 
-			return bacoApiInstance(requestOptions)
+			return _apiInstance(requestOptions)
 				.then((result: any) => {
 					resolve(result.data);
 				})

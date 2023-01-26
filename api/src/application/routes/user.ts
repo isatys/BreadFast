@@ -9,9 +9,10 @@ const userRoutes = (dependencies: any) => {
 
 	// router.route('/').get(controller.getUser);
 	router.route('/users').get(controller.getUsers);
-	router.route('/update/status').post(controller.updateUserStatus);
 	router.route('/:userid').get(controller.getUserById);
 	router.route('/delete').post(controller.deleteUser);
+	router.route('/validate/email').post(controller.validateUserEmail);
+	router.route('/resend/validate/email').post(controller.sendValidateEmail);
 
 	return router;
 };

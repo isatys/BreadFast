@@ -6,7 +6,7 @@ import User from '../../entities/user';
 const adminView = (props: any) => {
 	const { users, updateIsAccepted, sortList } = props;
 	return (
-		<section>
+		<>
 			<div className="row justify-content-center">adminView</div>
 			<div className="row">
 				<div className="col-12 d-flex justify-content-center bold">
@@ -123,7 +123,7 @@ const adminView = (props: any) => {
 					</table>
 				</div>
 			</div>
-		</section>
+		</>
 	);
 };
 
