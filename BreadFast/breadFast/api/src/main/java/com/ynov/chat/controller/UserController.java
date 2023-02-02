@@ -3,6 +3,8 @@ package com.ynov.chat.controller;
 
 import com.ynov.chat.model.User;
 import com.ynov.chat.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.Optional;
 
 // access doc swagger http://localhost:9000/swagger-ui.html#/user-controller
 @RestController
+@Api
 public class UserController {
 
     @Autowired
